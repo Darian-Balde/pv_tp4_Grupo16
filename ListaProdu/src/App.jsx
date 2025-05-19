@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import './App.css'
+import ProductForm from './components/ProductForm';
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(){
+  const [productos, setProductos] = useState([]);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [productoEditar, setProductoEditar] = useState(null);
+
+  useEffect(() => {
+    console.log('Productos actualizados:', productos);
+  }, [productos]);
+
+  const obtenerSiguienteId = () => {
+    if (productos.length === 0) return 1;
+    return Math.max(...productos.map((p) => p.id)) + 1;
+  };
+
+  const agregarProducto = useCallback((producto) => {
+    const nuevoProducto = { ...producto, id: obtenerSiguienteId() };
+    setProductos((prev) => [...prev, nuevoProducto]);
+    setMostrarFormulario(false);
+  }, [productos]);
+
+  const eliminarProducto = useCallback((id) => {
+    setProductos((prev) => prev.filter((p) => p.id !== id));
+    if (productoEditar?.id === id) setProductoEditar(null);
+  }, [productoEditar]);
+
+  const actualizarProducto = useCallback((id, datosActualizados) => {
+    setProductos((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...datosActualizados } : p))
+    );
+    setProductoEditar(null);
+    setMostrarFormulario(false);
+  }, []);
+
+  const manejarEditar = useCallback((producto) => {
+    setProductoEditar(producto);
+    setMostrarFormulario(true);
+  }, []);
+
+  const cancelarEdicion = useCallback(() => {
+    setProductoEditar(null);
+    setMostrarFormulario(false);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app-container">
+      <div className="top-bar">
+        <button
+          className="add-product-btn"
+          onClick={() => {
+            setMostrarFormulario(true);
+            setProductoEditar(null);
+          }}
+        >
+          Agregar Producto
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      {mostrarFormulario && (
+        <ProductForm
+          agregarProducto={agregarProducto}
+          actualizarProducto={actualizarProducto}
+          productoEditar={productoEditar}
+          cancelarEdicion={cancelarEdicion}
+        />
+      )}
+    </div>
+  );
+};
 
 export default App
