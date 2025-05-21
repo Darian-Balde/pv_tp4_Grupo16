@@ -1,0 +1,31 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #e3ccfc; /* lila claro */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0d0ff;
+}
+
+.search-bar label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #7c3aed; /* lila oscuro */
+}
+
+.search-input {
+  padding: 0.5rem;
+  border: 1px solid #c4b5fd;
+  border-radius: 4px;
+  flex: 1;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 2px #c084fc55;
+}
