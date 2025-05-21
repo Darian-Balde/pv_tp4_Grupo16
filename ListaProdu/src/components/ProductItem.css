@@ -1,0 +1,43 @@
+tr {
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+tr:hover {
+  background-color: #f3e8ff; /* lila claro al hacer hover */
+}
+
+td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0d0ff; /* borde lila claro */
+  font-size: 0.95rem;
+  color: #4c1d95; /* texto lila oscuro */
+}
+
+td button {
+  margin: 0 4px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+td button:first-child {
+  background-color: #a78bfa; /* lila medio para "Editar" */
+}
+
+td button:first-child:hover {
+  background-color: #7c3aed; /* lila oscuro al hacer hover */
+}
+
+td button:last-child {
+  background-color: #c084fc; /* lila claro para "Eliminar" */
+}
+
+td button:last-child:hover {
+  background-color: #9333ea; /* lila intenso al hacer hover */
+}
