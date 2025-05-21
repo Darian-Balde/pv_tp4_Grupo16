@@ -1,9 +1,8 @@
 import React from 'react'
-import './SearchBar.css'
 
 const SearchBar = ({ searchType, setSearchType, searchQuery, setSearchQuery }) => {
   return (
-    <div className="search-bar">
+    <div className="search-bar"> {/* La clase "search-bar" seguirá estando, pero no tendrá estilos aplicados desde un archivo CSS */}
       <label>
         <input
           type="radio"
