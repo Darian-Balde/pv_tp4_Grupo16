@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProductItem.css'
 
+
 const ProductItem = ({ producto, onEditar, onEliminar }) => {
   const { id, descripcion, precio, descuento, stock } = producto;
   const precioConDescuento = (parseFloat(precio) * (1 - descuento / 100)).toFixed(2);
