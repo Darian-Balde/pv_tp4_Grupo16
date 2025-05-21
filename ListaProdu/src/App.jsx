@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import './App.css'
+import './App.css';
+import SearchBar from './components/SearchBar';
 import ProductForm from './components/ProductForm';
 
-function App(){
+function App() {
   const [productos, setProductos] = useState([]);
+  const [filtro, setFiltro] = useState('descripcion');
+  const [busqueda, setBusqueda] = useState('');
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [productoEditar, setProductoEditar] = useState(null);
 
@@ -23,6 +26,7 @@ function App(){
   }, [productos]);
 
   const eliminarProducto = useCallback((id) => {
+ 
     setProductos((prev) => prev.filter((p) => p.id !== id));
     if (productoEditar?.id === id) setProductoEditar(null);
   }, [productoEditar]);
@@ -34,6 +38,22 @@ function App(){
     setProductoEditar(null);
     setMostrarFormulario(false);
   }, []);
+
+
+  const productosFiltrados = useMemo(() => {
+    if (!busqueda) {
+      return productos;
+    }
+
+    return productos.filter((p) => {
+      if (filtro === 'descripcion') {
+        return p.descripcion.toLowerCase().includes(busqueda.toLowerCase());
+      } else if (filtro === 'id') {
+        return String(p.id).includes(busqueda);
+      }
+      return true;
+    });
+  }, [productos, filtro, busqueda]);
 
   const manejarEditar = useCallback((producto) => {
     setProductoEditar(producto);
@@ -48,6 +68,13 @@ function App(){
   return (
     <div className="app-container">
       <div className="top-bar">
+        {/* SearchBar se mantiene */}
+        <SearchBar
+          searchType={filtro}
+          setSearchType={setFiltro}
+          searchQuery={busqueda}
+          setSearchQuery={setBusqueda}
+        />
         <button
           className="add-product-btn"
           onClick={() => {
@@ -58,6 +85,7 @@ function App(){
           Agregar Producto
         </button>
       </div>
+
       {mostrarFormulario && (
         <ProductForm
           agregarProducto={agregarProducto}
@@ -68,6 +96,6 @@ function App(){
       )}
     </div>
   );
-};
+}
 
-export default App
+export default App;
