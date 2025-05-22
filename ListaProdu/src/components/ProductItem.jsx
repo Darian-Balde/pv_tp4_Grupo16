@@ -22,4 +22,5 @@ const ProductItem = ({ producto, onEditar, onEliminar }) => {
   );
 };
 
+
 export default ProductItem;
