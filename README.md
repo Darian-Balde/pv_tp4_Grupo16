@@ -9,7 +9,7 @@ La aplicación permite gestionar una lista de productos. En la cual se puede agr
 - Buscar productos por descripción o ID
 - Editar campos existentes
 - Eliminar productos de la lista
-- Interfaz visual moderna con íconos e interacción clara
+
 
 ## INTEGRANTES / Usuario GitHub
 - BALDELOMAR DARIAN / Darian-Balde 
