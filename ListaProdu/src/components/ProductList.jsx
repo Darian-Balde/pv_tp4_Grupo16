@@ -1,13 +1,11 @@
 import React from 'react';
-import './ProductList.css';
 import ProductItem from './ProductItem';
+import './ProductList.css';
 
-const ProductList = ({ productos = [], onEditar, onEliminar }) => {
+const ProductList = ({ productos = [], onEditar, onEliminar, searchValue }) => {
   return (
     <div className="product-list">
-      {productos.length === 0 ? (
-        <p>No hay productos que coincidan con la búsqueda.</p>
-      ) : (
+      {productos.length > 0 ? (
         <table>
           <thead>
             <tr>
@@ -31,6 +29,12 @@ const ProductList = ({ productos = [], onEditar, onEliminar }) => {
             ))}
           </tbody>
         </table>
+      ) : searchValue.trim() !== '' ? (
+        <p>No hay productos que coincidan con la búsqueda.</p>
+      ) : (
+        <p style={{ textAlign: 'center', color: '#999' }}>
+          No hay productos todavía. Agregá uno para comenzar 😊
+        </p>
       )}
     </div>
   );
