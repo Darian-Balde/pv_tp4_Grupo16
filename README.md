@@ -10,5 +10,12 @@ La aplicación permite gestionar una lista de productos. En la cual se puede agr
 - TEJERINA GUADALUPE ORIANA / guadalupetejerina 
 - VALDEZ LARA MARIEL / LaraVldz
 
+## 🎯 Funcionalidades principales
+
+- Agregar nuevos productos con validación de campos
+- Buscar productos por descripción o ID
+- Editar campos existentes
+- Eliminar productos de la lista
+- Interfaz visual moderna con íconos e interacción clara
 
 

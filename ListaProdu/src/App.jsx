@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import './App.css'
+import './App.css';
+import NavBar from './components/NavBar'; //navbar
+import SearchBar from './components/SearchBar';
+import ProductList from './components/ProductList';
 import ProductForm from './components/ProductForm';
+// import NavBar from './components/NavBar'; // <- solo si usás NavBar
 
-function App(){
+function App() {
   const [productos, setProductos] = useState([]);
+  const [filtro, setFiltro] = useState('descripcion');
+  const [busqueda, setBusqueda] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [productoEditar, setProductoEditar] = useState(null);
 
@@ -40,34 +47,44 @@ function App(){
     setMostrarFormulario(true);
   }, []);
 
-  const cancelarEdicion = useCallback(() => {
-    setProductoEditar(null);
-    setMostrarFormulario(false);
-  }, []);
+  const productosFiltrados = useMemo(() => {
+    const texto = busqueda.toLowerCase();
+    return productos.filter((p) =>
+      filtro === 'id'
+        ? p.id.toString().includes(texto)
+        : p.descripcion.toLowerCase().includes(texto)
+    );
+  }, [productos, filtro, busqueda]);
 
   return (
     <div className="app-container">
-      <div className="top-bar">
-        <button
-          className="add-product-btn"
-          onClick={() => {
-            setMostrarFormulario(true);
-            setProductoEditar(null);
-          }}
-        >
-          Agregar Producto
-        </button>
-      </div>
+      <NavBar /> 
+      <SearchBar
+        searchType={filtro}
+        setSearchType={setFiltro}
+        searchQuery={busqueda}
+        setSearchQuery={setBusqueda}
+        setMostrarFormulario={setMostrarFormulario}
+      />
+      <ProductList
+        productos={productosFiltrados}
+        onEditar={manejarEditar}
+        onEliminar={eliminarProducto}
+        searchValue={busqueda}
+      />
       {mostrarFormulario && (
         <ProductForm
           agregarProducto={agregarProducto}
           actualizarProducto={actualizarProducto}
           productoEditar={productoEditar}
-          cancelarEdicion={cancelarEdicion}
+          cancelarEdicion={() => {
+            setProductoEditar(null);
+            setMostrarFormulario(false);
+          }}
         />
       )}
     </div>
   );
-};
+}
 
-export default App
+export default App;
