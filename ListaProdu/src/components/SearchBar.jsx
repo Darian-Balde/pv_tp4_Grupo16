@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
+import './SearchBar.css';
 
-const SearchBar = ({ searchType, setSearchType, searchQuery, setSearchQuery }) => {
+const SearchBar = ({
+  searchType,
+  setSearchType,
+  searchQuery,
+  setSearchQuery,
+  setMostrarFormulario
+}) => {
   return (
-    <div className="search-bar"> {/* La clase "search-bar" seguirá estando, pero no tendrá estilos aplicados desde un archivo CSS */}
+    <div className="search-bar">
       <label>
         <input
           type="radio"
@@ -28,8 +35,15 @@ const SearchBar = ({ searchType, setSearchType, searchQuery, setSearchQuery }) =
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-    </div>
-  )
-}
 
-export default SearchBar
+      <button
+        className="add-product-btn"
+        onClick={() => setMostrarFormulario(true)}
+      >
+        Agregar Producto
+      </button>
+    </div>
+  );
+};
+
+export default SearchBar;
