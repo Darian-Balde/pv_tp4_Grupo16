@@ -1,0 +1,42 @@
+.product-form {
+  background-color: #f3e8ff;
+  border: 1px solid #d6bbfc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.product-form input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #d6bbfc;
+  border-radius: 4px;
+  background-color: #f5f3ff;
+  color: #4c1d95;
+}
+
+.product-form input:focus {
+  outline: none;
+  border-color: #a78bfa;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-buttons button {
+  background-color: #a78bfa;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-buttons button:hover {
+  background-color: #7c3aed;
+}
